@@ -43,7 +43,7 @@ Create local `.env` files from the examples. Real `.env` files are ignored by Gi
 Frontend: `egim-app/.env`
 
 ```bash
-VITE_API_URL=https://egim-server.vercel.app/api
+VITE_API_URL=https://egim-8hp6.vercel.app/api
 ```
 
 Backend: `server/.env`
@@ -87,7 +87,7 @@ Deploy the `egim-app` directory to Vercel.
 Set this environment variable in Vercel:
 
 ```bash
-VITE_API_URL=https://egim-server.vercel.app/api
+VITE_API_URL=https://egim-8hp6.vercel.app/api
 ```
 
 Backend:
@@ -110,7 +110,7 @@ must point to the deployed backend project and include `/api`.
 Example:
 
 ```bash
-VITE_API_URL=https://egim-server.vercel.app/api
+VITE_API_URL=https://egim-8hp6.vercel.app/api
 CLIENT_URL=https://egim.vercel.app
 ```
 

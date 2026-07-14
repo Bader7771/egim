@@ -38,6 +38,27 @@ const corsOptions = {
   credentials: true,
 }
 
+app.use((req, res, next) => {
+  const origin = req.headers.origin
+
+  if (origin && allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin)
+  } else {
+    res.header('Access-Control-Allow-Origin', 'https://egim.vercel.app')
+  }
+
+  res.header('Vary', 'Origin')
+  res.header('Access-Control-Allow-Credentials', 'true')
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,PATCH,OPTIONS')
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200)
+  }
+
+  next()
+})
+
 app.use(cors(corsOptions))
 app.options('/{*splat}', cors(corsOptions))
 app.use(express.json())
@@ -64,6 +85,12 @@ app.get('/api/health', (req, res) => {
 app.get('/api/test-cors', (req, res) => {
   res.json({
     message: 'cors working',
+  })
+})
+
+app.get('/api/test', (req, res) => {
+  res.json({
+    message: 'Backend working',
   })
 })
 

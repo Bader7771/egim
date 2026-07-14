@@ -1,0 +1,13 @@
+{
+  "name": "egim",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "client": "cd egim-app && npm run dev",
+    "server": "cd server && npm run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

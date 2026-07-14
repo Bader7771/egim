@@ -104,6 +104,16 @@ ADMIN_PASSWORD=YOUR_ADMIN_PASSWORD
 ADMIN_TOKEN_SECRET=YOUR_TOKEN_SECRET
 ```
 
+For the current production frontend, the backend Vercel project must use:
+
+```bash
+CLIENT_URL=https://egim.vercel.app
+ADMIN_EMAIL=adminMehdi@egim.ma
+```
+
+Set `MONGO_URI`, `ADMIN_PASSWORD`, and `ADMIN_TOKEN_SECRET` only in Vercel. Do not
+commit those secret values.
+
 The frontend must not call relative `/api/...` URLs in production. `VITE_API_URL`
 must point to the deployed backend project and include `/api`.
 

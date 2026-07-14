@@ -74,7 +74,14 @@ app.get('/test-cors', (req, res) => {
   })
 })
 
-app.get('/api/health', (req, res) => {
+app.get('/api/health', async (req, res) => {
+  try {
+    await connectDB()
+  } catch (error) {
+    console.error('MongoDB health check failed:')
+    console.error(error)
+  }
+
   res.json({
     status: 'ok',
     service: 'egim-api',
@@ -96,12 +103,15 @@ app.get('/api/test', (req, res) => {
 
 app.use('/api/auth', authRoutes)
 
-app.use('/api', (req, res, next) => {
-  if (mongoose.connection.readyState !== 1) {
+app.use('/api', async (req, res, next) => {
+  try {
+    await connectDB()
+    next()
+  } catch (error) {
+    console.error('MongoDB request connection failed:')
+    console.error(error)
     return res.status(500).json({ message: 'Server error' })
   }
-
-  next()
 })
 
 app.use('/api/majors', majorRoutes)

@@ -9,7 +9,7 @@ function safeEqual(left, right) {
 }
 
 function createToken(email) {
-  const secret = process.env.ADMIN_TOKEN_SECRET || process.env.ADMIN_PASSWORD
+  const secret = process.env.ADMIN_TOKEN_SECRET
   const payload = {
     email,
     exp: Date.now() + 1000 * 60 * 60 * 8,
@@ -26,8 +26,9 @@ function createToken(email) {
 export async function loginAdmin(req, res) {
   const configuredEmail = process.env.ADMIN_EMAIL
   const configuredPassword = process.env.ADMIN_PASSWORD
+  const tokenSecret = process.env.ADMIN_TOKEN_SECRET
 
-  if (!configuredEmail || !configuredPassword) {
+  if (!configuredEmail || !configuredPassword || !tokenSecret) {
     return res.status(500).json({ message: 'Admin authentication is not configured' })
   }
 

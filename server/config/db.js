@@ -14,9 +14,14 @@ export async function connectDB() {
   }
 
   if (!connectionPromise) {
-    connectionPromise = mongoose.connect(mongoUri, {
-      serverSelectionTimeoutMS: 5000,
-    })
+    connectionPromise = mongoose
+      .connect(mongoUri, {
+        serverSelectionTimeoutMS: 5000,
+      })
+      .catch((error) => {
+        connectionPromise = undefined
+        throw error
+      })
   }
 
   await connectionPromise

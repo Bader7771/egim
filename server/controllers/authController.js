@@ -9,7 +9,7 @@ function safeEqual(left, right) {
 }
 
 function createToken(email) {
-  const secret = process.env.ADMIN_TOKEN_SECRET
+  const secret = process.env.ADMIN_TOKEN_SECRET.trim()
   const payload = {
     email,
     exp: Date.now() + 1000 * 60 * 60 * 8,
@@ -24,11 +24,16 @@ function createToken(email) {
 }
 
 export async function loginAdmin(req, res) {
-  const configuredEmail = process.env.ADMIN_EMAIL
-  const configuredPassword = process.env.ADMIN_PASSWORD
-  const tokenSecret = process.env.ADMIN_TOKEN_SECRET
+  const configuredEmail = process.env.ADMIN_EMAIL?.trim()
+  const configuredPassword = process.env.ADMIN_PASSWORD?.trim()
+  const tokenSecret = process.env.ADMIN_TOKEN_SECRET?.trim()
 
   if (!configuredEmail || !configuredPassword || !tokenSecret) {
+    console.warn('Admin authentication env status:', {
+      adminEmail: Boolean(configuredEmail),
+      adminPassword: Boolean(configuredPassword),
+      adminTokenSecret: Boolean(tokenSecret),
+    })
     return res.status(500).json({ message: 'Admin authentication is not configured' })
   }
 

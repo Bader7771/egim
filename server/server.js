@@ -25,6 +25,14 @@ const allowedOrigins = [
   .map((origin) => origin.trim())
   .filter(Boolean)
 
+console.log('Production env status:', {
+  mongoUri: Boolean(process.env.MONGO_URI),
+  clientUrl: Boolean(process.env.CLIENT_URL),
+  adminEmail: Boolean(process.env.ADMIN_EMAIL?.trim()),
+  adminPassword: Boolean(process.env.ADMIN_PASSWORD?.trim()),
+  adminTokenSecret: Boolean(process.env.ADMIN_TOKEN_SECRET?.trim()),
+})
+
 const corsOptions = {
   origin(origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {

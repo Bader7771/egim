@@ -43,7 +43,7 @@ Create local `.env` files from the examples. Real `.env` files are ignored by Gi
 Frontend: `egim-app/.env`
 
 ```bash
-VITE_API_URL=YOUR_BACKEND_URL/api
+VITE_API_URL=https://egim-server.vercel.app/api
 ```
 
 Backend: `server/.env`
@@ -51,7 +51,7 @@ Backend: `server/.env`
 ```bash
 PORT=5000
 MONGO_URI=YOUR_MONGODB_CONNECTION_STRING
-CLIENT_URL=YOUR_FRONTEND_URL
+CLIENT_URL=https://egim.vercel.app
 HOST=OPTIONAL_HOST_FOR_LOCAL_DEVELOPMENT
 ADMIN_EMAIL=YOUR_ADMIN_EMAIL
 ADMIN_PASSWORD=YOUR_ADMIN_PASSWORD
@@ -87,7 +87,7 @@ Deploy the `egim-app` directory to Vercel.
 Set this environment variable in Vercel:
 
 ```bash
-VITE_API_URL=https://YOUR-BACKEND-VERCEL-DOMAIN.vercel.app/api
+VITE_API_URL=https://egim-server.vercel.app/api
 ```
 
 Backend:
@@ -98,7 +98,7 @@ Set these environment variables on the backend host:
 
 ```bash
 MONGO_URI=YOUR_MONGODB_CONNECTION_STRING
-CLIENT_URL=https://YOUR-FRONTEND-VERCEL-DOMAIN.vercel.app
+CLIENT_URL=https://egim.vercel.app
 ADMIN_EMAIL=YOUR_ADMIN_EMAIL
 ADMIN_PASSWORD=YOUR_ADMIN_PASSWORD
 ADMIN_TOKEN_SECRET=YOUR_TOKEN_SECRET

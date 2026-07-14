@@ -17,8 +17,11 @@ dotenv.config()
 const app = express()
 const port = process.env.PORT || 5000
 const host = process.env.HOST
-const allowedOrigins = (process.env.CLIENT_URL || '')
-  .split(',')
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://egim.vercel.app',
+  ...(process.env.CLIENT_URL || '').split(','),
+]
   .map((origin) => origin.trim())
   .filter(Boolean)
 

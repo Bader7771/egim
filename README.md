@@ -87,7 +87,7 @@ Deploy the `egim-app` directory to Vercel.
 Set this environment variable in Vercel:
 
 ```bash
-VITE_API_URL=https://YOUR_BACKEND_DOMAIN/api
+VITE_API_URL=https://YOUR-BACKEND-VERCEL-DOMAIN.vercel.app/api
 ```
 
 Backend:
@@ -98,10 +98,20 @@ Set these environment variables on the backend host:
 
 ```bash
 MONGO_URI=YOUR_MONGODB_CONNECTION_STRING
-CLIENT_URL=https://YOUR_FRONTEND_DOMAIN
+CLIENT_URL=https://YOUR-FRONTEND-VERCEL-DOMAIN.vercel.app
 ADMIN_EMAIL=YOUR_ADMIN_EMAIL
 ADMIN_PASSWORD=YOUR_ADMIN_PASSWORD
 ADMIN_TOKEN_SECRET=YOUR_TOKEN_SECRET
+```
+
+The frontend must not call relative `/api/...` URLs in production. `VITE_API_URL`
+must point to the deployed backend project and include `/api`.
+
+Example:
+
+```bash
+VITE_API_URL=https://egim-server.vercel.app/api
+CLIENT_URL=https://egim.vercel.app
 ```
 
 ## API Routes

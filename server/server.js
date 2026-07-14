@@ -25,16 +25,21 @@ const allowedOrigins = [
   .map((origin) => origin.trim())
   .filter(Boolean)
 
-app.use(cors({
+const corsOptions = {
   origin(origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
       return callback(null, true)
     }
 
-    return callback(new Error('Not allowed by CORS'))
+    return callback(new Error('CORS blocked'))
   },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
-}))
+}
+
+app.use(cors(corsOptions))
+app.options('/{*splat}', cors(corsOptions))
 app.use(express.json())
 
 app.get('/', (req, res) => {
@@ -53,6 +58,12 @@ app.get('/api/health', (req, res) => {
     status: 'ok',
     service: 'egim-api',
     database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
+  })
+})
+
+app.get('/api/test-cors', (req, res) => {
+  res.json({
+    message: 'cors working',
   })
 })
 
@@ -81,18 +92,20 @@ app.use((err, req, res, next) => {
   })
 })
 
-const server = host
-  ? app.listen(port, host, () => {
-    console.log(`Server running on http://${host}:${port}`)
-  })
-  : app.listen(port, () => {
-    console.log(`Server running on port ${port}`)
-  })
+if (!process.env.VERCEL) {
+  const server = host
+    ? app.listen(port, host, () => {
+      console.log(`Server running on http://${host}:${port}`)
+    })
+    : app.listen(port, () => {
+      console.log(`Server running on port ${port}`)
+    })
 
-server.on('error', (error) => {
-  console.error(`Server failed to start on port ${port}: ${error.message}`)
-  process.exit(1)
-})
+  server.on('error', (error) => {
+    console.error(`Server failed to start on port ${port}: ${error.message}`)
+    process.exit(1)
+  })
+}
 
 connectDB()
   .then(() => {

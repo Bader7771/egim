@@ -3,7 +3,39 @@ import { api } from '../api/api'
 import { Navbar } from './Navbar'
 import { useReveal } from './useReveal'
 
-export function RegistrationSection({ majors, navigate }) {
+const admissionsImage = 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1000&q=82'
+const formImage = 'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?auto=format&fit=crop&w=900&q=82'
+
+export function AdmissionsSection({ navigate }) {
+  const steps = [
+    'Choose a major',
+    'Complete the application',
+    'Wait for school contact',
+    'Confirm registration',
+  ]
+
+  return (
+    <section className="admissions-story reveal" id="admissions">
+      <div className="admissions-image">
+        <img src={admissionsImage} alt="Students walking on a school campus" />
+      </div>
+      <div className="admissions-story-copy">
+        <span className="section-label">Admissions</span>
+        <h2>Registration for the next academic year</h2>
+        <p>
+          EGIM admissions helps each applicant choose a major, understand the
+          process, and complete the request before final school confirmation.
+        </p>
+        <ol className="steps-list">
+          {steps.map((step, index) => <li key={step}><span>{index + 1}</span>{step}</li>)}
+        </ol>
+        <button type="button" className="button-primary" onClick={() => navigate('/register')}>Apply Now</button>
+      </div>
+    </section>
+  )
+}
+
+export function RegistrationSection({ majors }) {
   const [form, setForm] = useState({
     fullName: '',
     phone: '',
@@ -13,37 +45,51 @@ export function RegistrationSection({ majors, navigate }) {
     message: '',
   })
   const [status, setStatus] = useState({ type: '', text: '' })
+  const [submitting, setSubmitting] = useState(false)
 
   async function submit(event) {
     event.preventDefault()
     setStatus({ type: '', text: '' })
+    setSubmitting(true)
     try {
       await api.post('/registration-requests', form)
       setStatus({ type: 'success', text: 'Your application request was sent. EGIM will contact you soon.' })
       setForm({ fullName: '', phone: '', email: '', birthDate: '', majorId: '', message: '' })
     } catch (error) {
       setStatus({ type: 'error', text: error.message })
+    } finally {
+      setSubmitting(false)
     }
   }
 
   return (
-    <section className="admissions-section reveal" id="admissions">
-      <div className="admissions-copy">
-        <span className="section-label">Admissions</span>
-        <h2>Start your registration request</h2>
-        <p>
-          Share your details with EGIM admissions. The school team will review
-          your request and guide you through the next steps.
-        </p>
-        <div className="admissions-note">
-          <strong>Simple process</strong>
-          <span>Request, review, school contact, and final registration.</span>
+    <section className="registration-section reveal" id="registration">
+      <div className="registration-panel">
+        <img src={formImage} alt="Student preparing an application" />
+        <div>
+          <span className="section-label">Application Form</span>
+          <h2>Start your registration request</h2>
+          <p>
+            Share your details with EGIM admissions. The school team will review
+            your request and guide you through the next steps.
+          </p>
+          <ul className="benefit-list">
+            <li>Guided major selection</li>
+            <li>Admissions team follow-up</li>
+            <li>Next-year registration support</li>
+          </ul>
+          <div className="contact-mini">
+            <strong>Admissions office</strong>
+            <span>contact@egim.ma</span>
+            <span>+212 600 000 000</span>
+          </div>
         </div>
       </div>
       <ApplicationForm
         form={form}
         majors={majors}
         status={status}
+        submitting={submitting}
         setForm={setForm}
         onSubmit={submit}
       />
@@ -51,20 +97,40 @@ export function RegistrationSection({ majors, navigate }) {
   )
 }
 
-export function ApplicationForm({ form, majors, status, setForm, onSubmit }) {
+export function ApplicationForm({ form, majors, status, submitting = false, setForm, onSubmit }) {
   return (
     <form className="application-form" onSubmit={onSubmit}>
       {status.text && <div className={`message ${status.type}`}>{status.text}</div>}
-      <input value={form.fullName} onChange={(event) => setForm({ ...form, fullName: event.target.value })} placeholder="Full name" required />
-      <input value={form.phone} onChange={(event) => setForm({ ...form, phone: event.target.value })} placeholder="Phone" required />
-      <input type="email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} placeholder="Email" />
-      <input type="date" value={form.birthDate} onChange={(event) => setForm({ ...form, birthDate: event.target.value })} />
-      <select value={form.majorId} onChange={(event) => setForm({ ...form, majorId: event.target.value })} required>
-        <option value="">Select major</option>
-        {majors.map((major) => <option key={major._id} value={major._id}>{major.name}</option>)}
-      </select>
-      <textarea rows="5" value={form.message} onChange={(event) => setForm({ ...form, message: event.target.value })} placeholder="Message"></textarea>
-      <button type="submit" className="button-primary">Send application request</button>
+      <div className="form-fields">
+        <label>
+          <span>Full name</span>
+          <input value={form.fullName} onChange={(event) => setForm({ ...form, fullName: event.target.value })} placeholder="Your full name" required />
+        </label>
+        <label>
+          <span>Phone</span>
+          <input value={form.phone} onChange={(event) => setForm({ ...form, phone: event.target.value })} placeholder="+212 ..." required />
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} placeholder="you@example.com" />
+        </label>
+        <label>
+          <span>Birth date</span>
+          <input type="date" value={form.birthDate} onChange={(event) => setForm({ ...form, birthDate: event.target.value })} />
+        </label>
+        <label className="full-field">
+          <span>Major</span>
+          <select value={form.majorId} onChange={(event) => setForm({ ...form, majorId: event.target.value })} required>
+            <option value="">Select major</option>
+            {majors.map((major) => <option key={major._id} value={major._id}>{major.name}</option>)}
+          </select>
+        </label>
+        <label className="full-field">
+          <span>Message</span>
+          <textarea rows="5" value={form.message} onChange={(event) => setForm({ ...form, message: event.target.value })} placeholder="Tell us which program you are interested in."></textarea>
+        </label>
+      </div>
+      <button type="submit" className="button-primary" disabled={submitting}>{submitting ? 'Sending request...' : 'Send application request'}</button>
     </form>
   )
 }
@@ -80,6 +146,7 @@ export function RegistrationPage({ navigate }) {
     message: '',
   })
   const [status, setStatus] = useState({ type: '', text: '' })
+  const [submitting, setSubmitting] = useState(false)
 
   useReveal()
 
@@ -90,12 +157,15 @@ export function RegistrationPage({ navigate }) {
   async function submit(event) {
     event.preventDefault()
     setStatus({ type: '', text: '' })
+    setSubmitting(true)
     try {
       await api.post('/registration-requests', form)
       setStatus({ type: 'success', text: 'Your application request was sent. EGIM will contact you soon.' })
       setForm({ fullName: '', phone: '', email: '', birthDate: '', majorId: '', message: '' })
     } catch (error) {
       setStatus({ type: 'error', text: error.message })
+    } finally {
+      setSubmitting(false)
     }
   }
 
@@ -112,6 +182,7 @@ export function RegistrationPage({ navigate }) {
           form={form}
           majors={majors}
           status={status}
+          submitting={submitting}
           setForm={setForm}
           onSubmit={submit}
         />

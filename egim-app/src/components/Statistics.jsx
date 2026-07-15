@@ -25,6 +25,7 @@ export function Statistics({ majors, groups, students }) {
     ['Majors', majors.length, 'Active academic programs'],
     ['Groups', groups.length, 'Organized class groups'],
     ['Students', students.length, 'Registered student records'],
+    ['Admissions', majors.length || 1, 'Registration opportunities'],
   ]
 
   return (

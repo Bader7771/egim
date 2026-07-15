@@ -1,4 +1,4 @@
-import heroImage from '../assets/hero.png'
+const heroImage = 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=82'
 
 export function Hero({ navigate, stats }) {
   return (
@@ -6,31 +6,33 @@ export function Hero({ navigate, stats }) {
       <div className="hero-overlay"></div>
       <div className="hero-inner">
         <div className="hero-content">
-          <span className="section-label">Professional private school</span>
-          <h1>Shape your future with professional education</h1>
+          <span className="section-label">Professional Education for a Better Future</span>
+          <h1>Build your future with EGIM</h1>
           <p>
-            EGIM helps ambitious students build practical skills, career habits,
-            and confidence through structured programs connected to real
-            professional expectations.
+            EGIM provides career-focused education, practical training, and a
+            disciplined school environment for students preparing for meaningful
+            professional paths.
           </p>
           <div className="hero-buttons">
-            <a className="button-primary" href="#majors">Discover programs</a>
-            <button type="button" className="button-secondary" onClick={() => navigate('/register')}>Apply now</button>
+            <a className="button-primary" href="#majors">Discover Our Majors</a>
+            <button type="button" className="button-secondary" onClick={() => navigate('/register')}>Apply for Next Year</button>
           </div>
         </div>
         <div className="hero-media" aria-label="EGIM professional education">
-          <img src={heroImage} alt="Professional learning environment" />
+          <div className="shape shape-blue"></div>
+          <div className="shape shape-yellow"></div>
+          <img src={heroImage} alt="Students learning in a modern classroom" />
           <div className="hero-metric metric-one">
-            <strong>{stats.majors}</strong>
-            <span>Programs</span>
+            <strong>{stats.majors || 3}</strong>
+            <span>Professional Majors</span>
           </div>
           <div className="hero-metric metric-two">
-            <strong>{stats.students}</strong>
-            <span>Student records</span>
+            <strong>{stats.students || 'Live'}</strong>
+            <span>Student Records</span>
           </div>
           <div className="hero-badge">
             <span></span>
-            Career-focused training
+            Career-Focused Training
           </div>
         </div>
       </div>

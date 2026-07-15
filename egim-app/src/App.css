@@ -1895,3 +1895,991 @@ tbody tr:hover {
     padding-bottom: 68px;
   }
 }
+
+:root {
+  --blue-dark: #0d2d6c;
+  --blue-primary: #1746a2;
+  --blue-bright: #1f75ff;
+  --yellow: #f8c537;
+  --white: #ffffff;
+  --black: #101828;
+  --gray-light: #f4f7fb;
+  --gray-text: #667085;
+}
+
+.public-redesign {
+  color: var(--black);
+  background: var(--white);
+}
+
+.public-redesign main {
+  overflow: clip;
+}
+
+.site-navbar {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 22px;
+  padding: 16px clamp(18px, 4vw, 64px);
+  background: rgba(255, 255, 255, 0.92);
+  border-bottom: 1px solid rgba(13, 45, 108, 0.08);
+}
+
+.site-navbar.is-scrolled {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 16px 48px rgba(13, 45, 108, 0.12);
+}
+
+.egim-logo {
+  color: var(--blue-dark);
+}
+
+.egim-logo span {
+  background: linear-gradient(135deg, var(--blue-dark), var(--blue-bright));
+}
+
+.egim-logo strong {
+  color: var(--blue-dark);
+  letter-spacing: 0.08em;
+}
+
+.menu-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(13, 45, 108, 0.14);
+  border-radius: 8px;
+  background: var(--white);
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  margin: 5px auto;
+  background: var(--blue-dark);
+}
+
+.site-navbar nav {
+  justify-content: center;
+}
+
+.site-navbar nav a {
+  color: #344054;
+  font-weight: 800;
+}
+
+.site-navbar nav a.active,
+.site-navbar nav a:hover {
+  color: var(--blue-primary);
+}
+
+.site-navbar nav a::after {
+  background: var(--yellow);
+}
+
+.nav-login {
+  background: var(--white);
+  color: var(--blue-primary);
+  border-color: rgba(23, 70, 162, 0.2);
+}
+
+.nav-cta,
+.button-primary,
+.program-card button,
+.overview-card button {
+  border-color: var(--blue-primary);
+  background: var(--blue-primary);
+  color: var(--white);
+}
+
+.button-primary,
+.button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.button-primary:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.nav-cta:hover,
+.button-primary:hover,
+.program-card button:hover,
+.overview-card button:hover {
+  background: var(--blue-dark);
+}
+
+.new-hero {
+  min-height: calc(100vh - 80px);
+  padding: clamp(58px, 7vw, 98px) clamp(18px, 5vw, 72px) 120px;
+  background:
+    linear-gradient(120deg, rgba(13, 45, 108, 0.98), rgba(23, 70, 162, 0.9) 52%, rgba(31, 117, 255, 0.78)),
+    url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1800&q=82") center/cover;
+}
+
+.hero-inner {
+  min-height: 620px;
+}
+
+.new-hero .section-label {
+  color: var(--yellow);
+}
+
+.hero-content h1 {
+  max-width: 720px;
+  letter-spacing: 0;
+}
+
+.hero-content p {
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.button-secondary {
+  border-color: rgba(255, 255, 255, 0.56);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.hero-media {
+  isolation: isolate;
+}
+
+.hero-media img {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 4 / 5;
+  height: auto;
+  min-height: 560px;
+}
+
+.shape {
+  position: absolute;
+  z-index: 0;
+  border-radius: 8px;
+}
+
+.shape-blue {
+  right: -20px;
+  top: -20px;
+  width: 36%;
+  height: 34%;
+  background: var(--blue-bright);
+}
+
+.shape-yellow {
+  left: -22px;
+  bottom: 82px;
+  width: 28%;
+  height: 22%;
+  background: var(--yellow);
+}
+
+.hero-metric strong {
+  color: var(--blue-dark);
+}
+
+.hero-badge span {
+  background: var(--yellow);
+}
+
+.program-overview {
+  position: relative;
+  z-index: 4;
+  display: grid;
+  grid-template-columns: 0.76fr 1.24fr;
+  gap: 26px;
+  max-width: 1220px;
+  margin: -76px auto 0;
+  padding: 30px;
+  border-radius: 8px;
+  background: var(--blue-dark);
+  box-shadow: 0 30px 80px rgba(13, 45, 108, 0.25);
+}
+
+.program-overview-intro h2,
+.program-overview-intro p {
+  color: var(--white);
+}
+
+.program-overview-intro h2 {
+  margin: 12px 0;
+  font-size: clamp(28px, 3.6vw, 44px);
+  line-height: 1.04;
+}
+
+.overview-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.overview-card {
+  padding: 20px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.overview-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.overview-card.highlight {
+  background: var(--blue-primary);
+}
+
+.overview-card h3 {
+  margin: 12px 0 8px;
+  color: var(--white);
+}
+
+.overview-card p {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.overview-card button {
+  min-height: 38px;
+  margin-top: 8px;
+  padding: 0 14px;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.card-icon {
+  display: inline-grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--yellow);
+  color: var(--blue-dark);
+  font-weight: 900;
+}
+
+.school-section {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  align-items: center;
+  gap: clamp(34px, 5vw, 70px);
+}
+
+.about-media,
+.admissions-image {
+  position: relative;
+}
+
+.about-media img,
+.admissions-image img,
+.registration-panel img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 24px 64px rgba(13, 45, 108, 0.16);
+}
+
+.about-media img {
+  aspect-ratio: 5 / 4;
+}
+
+.image-accent {
+  position: absolute;
+  right: -18px;
+  top: -18px;
+  width: 34%;
+  height: 36%;
+  border-radius: 8px;
+  background: var(--yellow);
+}
+
+.about-media img,
+.about-note {
+  position: relative;
+  z-index: 1;
+}
+
+.about-note {
+  display: grid;
+  gap: 4px;
+  max-width: 280px;
+  margin: -58px 24px 0 auto;
+  padding: 18px;
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: 0 18px 48px rgba(13, 45, 108, 0.16);
+}
+
+.about-note strong,
+.mission-grid strong,
+.contact-mini strong {
+  color: var(--blue-dark);
+}
+
+.about-note span,
+.mission-grid span,
+.contact-mini span {
+  color: var(--gray-text);
+}
+
+.about-copy h2,
+.why-copy h2,
+.admissions-story-copy h2,
+.registration-panel h2,
+.campus-section h2,
+.testimonials-section h2,
+.contact-copy h2 {
+  color: var(--blue-dark);
+}
+
+.mission-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 24px 0;
+}
+
+.mission-grid article {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+  border: 1px solid rgba(13, 45, 108, 0.1);
+  border-radius: 8px;
+  background: var(--gray-light);
+}
+
+.point-list,
+.benefit-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 0;
+  margin: 0 0 26px;
+  list-style: none;
+}
+
+.point-list li,
+.benefit-list li {
+  position: relative;
+  padding-left: 22px;
+  color: #344054;
+  font-weight: 800;
+}
+
+.point-list li::before,
+.benefit-list li::before {
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  content: "";
+  background: var(--yellow);
+}
+
+.why-section {
+  position: relative;
+  max-width: none;
+  padding: 104px clamp(18px, 5vw, 72px);
+  background:
+    linear-gradient(rgba(13, 45, 108, 0.92), rgba(13, 45, 108, 0.92)),
+    url("https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=1800&q=82") center/cover;
+}
+
+.why-copy {
+  max-width: 760px;
+  margin: 0 auto 34px;
+  text-align: center;
+}
+
+.why-copy h2,
+.why-copy p {
+  color: var(--white);
+}
+
+.why-copy .section-label {
+  color: var(--yellow);
+}
+
+.why-card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  max-width: 1220px;
+  margin: 0 auto;
+}
+
+.why-step-card {
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.why-step-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.why-step-card.highlight {
+  background: var(--blue-bright);
+}
+
+.why-step-card span {
+  color: var(--yellow);
+  font-weight: 900;
+}
+
+.why-step-card h3 {
+  color: var(--white);
+}
+
+.why-step-card p {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.programs-section {
+  background: var(--gray-light);
+}
+
+.programs-grid {
+  align-items: stretch;
+}
+
+.program-card {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  padding: 0;
+  overflow: hidden;
+}
+
+.program-card::before {
+  display: none;
+}
+
+.program-image {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+}
+
+.program-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 320ms ease;
+}
+
+.program-card:hover .program-image img,
+.gallery-grid figure:hover img {
+  transform: scale(1.06);
+}
+
+.program-image span {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--yellow);
+  color: var(--blue-dark);
+  font-weight: 900;
+}
+
+.program-body {
+  display: grid;
+  padding: 24px;
+}
+
+.program-body h3 {
+  color: var(--blue-dark);
+}
+
+.program-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  align-self: end;
+  margin-top: 14px;
+}
+
+.program-actions .button-light {
+  background: var(--white);
+  color: var(--blue-primary);
+  border-color: rgba(23, 70, 162, 0.18);
+}
+
+.numbers-section {
+  max-width: none;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding-left: clamp(18px, 5vw, 72px);
+  padding-right: clamp(18px, 5vw, 72px);
+  background: var(--blue-primary);
+}
+
+.number-card {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: none;
+}
+
+.number-card strong,
+.number-card span,
+.number-card p {
+  color: var(--white);
+}
+
+.number-card span::after {
+  display: block;
+  width: 42px;
+  height: 3px;
+  margin: 10px auto 0;
+  content: "";
+  background: var(--yellow);
+}
+
+.admissions-story,
+.registration-section,
+.campus-section,
+.testimonials-section {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 96px clamp(18px, 4vw, 36px);
+}
+
+.admissions-story {
+  display: grid;
+  grid-template-columns: 0.92fr 1fr;
+  align-items: center;
+  gap: 46px;
+}
+
+.admissions-image img {
+  aspect-ratio: 5 / 4;
+}
+
+.steps-list {
+  display: grid;
+  gap: 12px;
+  padding: 0;
+  margin: 24px 0;
+  list-style: none;
+}
+
+.steps-list li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #344054;
+  font-weight: 900;
+}
+
+.steps-list span {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--yellow);
+  color: var(--blue-dark);
+}
+
+.registration-section {
+  display: grid;
+  grid-template-columns: 0.82fr 1fr;
+  gap: 34px;
+  align-items: stretch;
+  background: var(--white);
+}
+
+.registration-panel,
+.application-form,
+.testimonial-card,
+.contact-details {
+  border: 1px solid rgba(13, 45, 108, 0.1);
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: 0 18px 50px rgba(13, 45, 108, 0.08);
+}
+
+.registration-panel {
+  overflow: hidden;
+}
+
+.registration-panel img {
+  display: block;
+  aspect-ratio: 16 / 10;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.registration-panel > div {
+  padding: 28px;
+}
+
+.contact-mini {
+  display: grid;
+  gap: 4px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(13, 45, 108, 0.1);
+}
+
+.application-form {
+  align-content: start;
+  padding: 30px;
+}
+
+.form-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.form-fields label {
+  display: grid;
+  gap: 8px;
+}
+
+.form-fields label span {
+  color: var(--blue-dark);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.full-field {
+  grid-column: 1 / -1;
+}
+
+.application-form input,
+.application-form select,
+.application-form textarea,
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  min-height: 48px;
+  border-color: rgba(13, 45, 108, 0.14);
+  border-radius: 8px;
+}
+
+.application-form input:focus,
+.application-form select:focus,
+.application-form textarea:focus,
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--blue-bright);
+  box-shadow: 0 0 0 4px rgba(31, 117, 255, 0.12);
+}
+
+.campus-section {
+  max-width: none;
+  padding-left: clamp(18px, 5vw, 72px);
+  padding-right: clamp(18px, 5vw, 72px);
+  background: var(--gray-light);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: 220px;
+  gap: 14px;
+  max-width: 1220px;
+  margin: 0 auto;
+}
+
+.gallery-grid figure {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  border-radius: 8px;
+  background: var(--blue-dark);
+}
+
+.gallery-grid figure.wide {
+  grid-column: span 2;
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 320ms ease;
+}
+
+.gallery-grid figcaption {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(13, 45, 108, 0.86);
+  color: var(--white);
+  font-weight: 900;
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.testimonial-card {
+  display: grid;
+  gap: 18px;
+  padding: 24px;
+}
+
+.rating {
+  width: max-content;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(248, 197, 55, 0.18);
+  color: #986a00;
+  font-weight: 900;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.testimonial-author > span {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--blue-primary);
+  color: var(--white);
+  font-weight: 900;
+}
+
+.testimonial-author strong,
+.testimonial-author small {
+  display: block;
+}
+
+.testimonial-author small {
+  color: var(--gray-text);
+}
+
+.contact-redesign {
+  grid-template-columns: 0.92fr 1fr;
+}
+
+.map-placeholder {
+  display: grid;
+  min-height: 260px;
+  margin-top: 28px;
+  place-items: center;
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(13, 45, 108, 0.92), rgba(31, 117, 255, 0.72)),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.12) 0 1px, transparent 1px 18px);
+  color: var(--white);
+  text-align: center;
+}
+
+.map-placeholder span,
+.map-placeholder strong {
+  display: block;
+}
+
+.contact-form {
+  display: grid;
+  gap: 12px;
+  margin: 22px 0;
+}
+
+.site-footer {
+  display: grid;
+  grid-template-columns: 0.7fr 1.3fr;
+  align-items: start;
+  gap: 34px;
+  background: var(--blue-dark);
+  border-top: 5px solid var(--yellow);
+}
+
+.footer-brand p {
+  max-width: 340px;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.footer-links div {
+  display: grid;
+  gap: 10px;
+}
+
+.footer-links strong {
+  color: var(--white);
+}
+
+.site-footer a,
+.site-footer button {
+  width: fit-content;
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.footer-bottom {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.footer-socials {
+  display: flex;
+  gap: 12px;
+}
+
+.standalone-application {
+  background: var(--gray-light);
+}
+
+@media (max-width: 1080px) {
+  .site-navbar {
+    grid-template-columns: auto auto;
+  }
+
+  .menu-toggle {
+    display: block;
+    justify-self: end;
+  }
+
+  .site-navbar nav,
+  .nav-actions {
+    display: none;
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .site-navbar nav.is-open,
+  .nav-actions.is-open {
+    display: flex;
+  }
+
+  .site-navbar nav {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .hero-inner,
+  .program-overview,
+  .school-section,
+  .admissions-story,
+  .registration-section,
+  .contact-redesign,
+  .site-footer {
+    grid-template-columns: 1fr;
+  }
+
+  .why-card-grid,
+  .numbers-section,
+  .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gallery-grid figure.wide {
+    grid-column: span 1;
+  }
+
+  .footer-bottom {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 760px) {
+  .site-navbar nav.is-open,
+  .nav-actions.is-open,
+  .nav-actions,
+  .hero-buttons,
+  .programs-header,
+  .footer-bottom {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .new-hero {
+    padding-bottom: 92px;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(40px, 13vw, 58px);
+  }
+
+  .hero-media img {
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+
+  .shape,
+  .hero-metric,
+  .hero-badge {
+    position: static;
+    margin-top: 12px;
+  }
+
+  .program-overview {
+    margin-top: -44px;
+    padding: 22px;
+  }
+
+  .overview-cards,
+  .mission-grid,
+  .point-list,
+  .benefit-list,
+  .why-card-grid,
+  .program-actions,
+  .numbers-section,
+  .form-fields,
+  .gallery-grid,
+  .testimonial-grid,
+  .footer-links {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-grid {
+    grid-auto-rows: 240px;
+  }
+
+  .school-section,
+  .why-section,
+  .programs-section,
+  .numbers-section,
+  .admissions-story,
+  .registration-section,
+  .campus-section,
+  .testimonials-section,
+  .contact-redesign,
+  .standalone-application {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .contact-details p {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}

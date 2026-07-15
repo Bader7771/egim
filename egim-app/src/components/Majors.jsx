@@ -9,16 +9,22 @@ const majorThemes = [
     match: ['develop', 'informatique', 'code', 'software', 'computer'],
     image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=82',
     icon: '</>',
+    skills: ['Programmation web', 'Bases de données', 'Logique informatique'],
+    careers: ['Développeur web', 'Technicien informatique', 'Support informatique'],
   },
   {
     match: ['gestion', 'business', 'entreprise', 'management'],
     image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=82',
-    icon: 'BS',
+    icon: 'GE',
+    skills: ['Gestion administrative', 'Communication professionnelle', 'Organisation'],
+    careers: ['Assistant administratif', 'Commercial', 'Assistant comptable'],
   },
   {
     match: ['nursing', 'nurse', 'health', 'medical', 'soins', 'infirm'],
     image: 'https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&w=900&q=82',
-    icon: 'HC',
+    icon: 'SI',
+    skills: ['Gestes de soins', 'Hygiène et sécurité', 'Accompagnement des patients'],
+    careers: ['Assistant en soins', 'Aide-soignant', 'Agent de santé'],
   },
 ]
 
@@ -27,6 +33,8 @@ function getMajorTheme(name = '') {
   return majorThemes.find((theme) => theme.match.some((word) => normalized.includes(word))) || {
     image: fallbackImage,
     icon: 'EG',
+    skills: ['Travail en équipe', 'Méthodes professionnelles', 'Communication'],
+    careers: ['Assistant spécialisé', 'Technicien junior', 'Support opérationnel'],
   }
 }
 
@@ -39,12 +47,12 @@ export function Majors({ majors, groups, loading, navigate }) {
     <section className="programs-section reveal" id="majors">
       <div className="programs-header">
         <div>
-          <span className="section-label">Programs</span>
-          <h2>Majors connected to professional opportunity</h2>
+          <span className="section-label">Nos filières en détail</span>
+          <h2>Des filières liées aux compétences professionnelles</h2>
         </div>
         <p>
-          Explore EGIM programs from the live school database and choose the path
-          that matches your future plans.
+          Les filières affichées proviennent de la base de données de l’école.
+          Chaque carte présente les compétences travaillées et des débouchés réalistes.
         </p>
       </div>
       <div className="programs-grid">
@@ -54,19 +62,29 @@ export function Majors({ majors, groups, loading, navigate }) {
           return (
             <article className="program-card" key={major._id}>
               <div className="program-image">
-                <img src={theme.image} alt={`${major.name} students at EGIM`} />
+                <img src={theme.image} alt={`Etudiants EGIM en ${major.name}`} />
                 <span>{theme.icon}</span>
               </div>
               <div className="program-body">
                 <div className="program-topline">
-                  <span>{groupCount} groups</span>
-                  <small>Open</small>
+                  <span>{groupCount} groupe{groupCount > 1 ? 's' : ''}</span>
+                  <small>Ouvert</small>
                 </div>
                 <h3>{major.name}</h3>
-                <p>{major.description || 'Professional training program with structured courses, applied learning, and guided preparation.'}</p>
+                <p>{major.description || 'Formation professionnelle avec cours structurés, apprentissage appliqué et accompagnement pédagogique.'}</p>
+                <div className="program-details">
+                  <div>
+                    <strong>Compétences</strong>
+                    <ul>{theme.skills.map((skill) => <li key={skill}>{skill}</li>)}</ul>
+                  </div>
+                  <div>
+                    <strong>Débouchés possibles</strong>
+                    <ul>{theme.careers.map((career) => <li key={career}>{career}</li>)}</ul>
+                  </div>
+                </div>
                 <div className="program-actions">
-                  <button type="button" className="button-light" onClick={() => document.getElementById('admissions')?.scrollIntoView({ behavior: 'smooth' })}>View Program</button>
-                  <button type="button" onClick={() => applyForMajor(major._id)}>Apply Now</button>
+                  <button type="button" className="button-light" onClick={() => document.getElementById('admissions')?.scrollIntoView({ behavior: 'smooth' })}>Découvrir la filière</button>
+                  <button type="button" onClick={() => applyForMajor(major._id)}>Se préinscrire</button>
                 </div>
               </div>
             </article>
@@ -75,17 +93,17 @@ export function Majors({ majors, groups, loading, navigate }) {
         {!loading && majors.length === 0 && (
           <article className="program-card empty-program">
             <div className="program-image">
-              <img src={fallbackImage} alt="EGIM classroom" />
+              <img src={fallbackImage} alt="Salle de cours EGIM" />
               <span>EG</span>
             </div>
             <div className="program-body">
               <div className="program-topline">
-                <span>Coming soon</span>
+                <span>Bientôt</span>
                 <small>EGIM</small>
               </div>
-              <h3>Programs are being prepared</h3>
-              <p>Available majors will appear here once they are added from the admin dashboard.</p>
-              <button type="button" onClick={() => navigate('/register')}>Send interest</button>
+              <h3>Les filières sont en préparation</h3>
+              <p>Les filières disponibles apparaîtront ici dès leur ajout depuis le tableau de bord.</p>
+              <button type="button" onClick={() => navigate('/register')}>Envoyer une demande</button>
             </div>
           </article>
         )}

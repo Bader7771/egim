@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react'
+import egimLogo from '../assets/egim-logo.jpg'
 
 const navLinks = [
-  ['home', 'Home'],
-  ['about', 'About'],
-  ['majors', 'Majors'],
+  ['home', 'Accueil'],
+  ['about', 'À propos'],
+  ['majors', 'Filières'],
   ['admissions', 'Admissions'],
-  ['student-life', 'Student Life'],
+  ['student-life', 'Vie etudiante'],
   ['contact', 'Contact'],
 ]
 
 export function LogoMark() {
   return (
     <div className="egim-logo" aria-label="EGIM">
-      <span>EG</span>
+      <img src={egimLogo} alt="Logo EGIM" />
       <strong>EGIM</strong>
     </div>
   )
@@ -53,7 +54,7 @@ export function Navbar({ navigate }) {
       <button
         className="menu-toggle"
         type="button"
-        aria-label="Toggle navigation menu"
+        aria-label="Ouvrir le menu de navigation"
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
       >
@@ -67,8 +68,8 @@ export function Navbar({ navigate }) {
         ))}
       </nav>
       <div className={`nav-actions ${open ? 'is-open' : ''}`}>
-        <button type="button" className="nav-login" onClick={() => { setOpen(false); navigate('/admin/login') }}>Admin Login</button>
-        <button type="button" className="nav-cta" onClick={() => { setOpen(false); navigate('/register') }}>Register Now</button>
+        <button type="button" className="nav-login" onClick={() => { setOpen(false); navigate('/admin/login') }}>Connexion administrateur</button>
+        <button type="button" className="nav-cta" onClick={() => { setOpen(false); navigate('/register') }}>Préinscription</button>
       </div>
     </header>
   )

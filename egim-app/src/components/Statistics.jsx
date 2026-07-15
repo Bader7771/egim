@@ -22,10 +22,10 @@ function Counter({ value }) {
 
 export function Statistics({ majors, groups, students }) {
   const stats = [
-    ['Majors', majors.length, 'Active academic programs'],
-    ['Groups', groups.length, 'Organized class groups'],
-    ['Students', students.length, 'Registered student records'],
-    ['Admissions', majors.length || 1, 'Registration opportunities'],
+    ['Filières', majors.length, 'Programmes actifs'],
+    ['Groupes', groups.length, 'Groupes de classe organisés'],
+    ['Etudiants', students.length, 'Dossiers étudiants enregistrés'],
+    ['Préinscriptions', majors.length || 1, 'Opportunités de candidature'],
   ]
 
   return (

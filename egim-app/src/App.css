@@ -1935,6 +1935,14 @@ tbody tr:hover {
   color: var(--blue-dark);
 }
 
+.egim-logo img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: var(--white);
+}
+
 .egim-logo span {
   background: linear-gradient(135deg, var(--blue-dark), var(--blue-bright));
 }
@@ -2035,6 +2043,15 @@ tbody tr:hover {
 .hero-content h1 {
   max-width: 720px;
   letter-spacing: 0;
+}
+
+.hero-logo-badge {
+  display: inline-flex;
+  padding: 8px 12px;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16);
 }
 
 .hero-content p {
@@ -2353,6 +2370,123 @@ tbody tr:hover {
   background: var(--gray-light);
 }
 
+.pedagogy-section,
+.career-section,
+.faq-section {
+  max-width: 1220px;
+  margin: 0 auto;
+  padding: 96px clamp(18px, 4vw, 36px);
+}
+
+.section-intro.centered {
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+}
+
+.pedagogy-timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.pedagogy-timeline::before {
+  position: absolute;
+  top: 48px;
+  left: 10%;
+  right: 10%;
+  height: 3px;
+  content: "";
+  background: linear-gradient(90deg, var(--blue-primary), var(--yellow));
+}
+
+.pedagogy-card,
+.career-card,
+.faq-item {
+  position: relative;
+  z-index: 1;
+  border: 1px solid rgba(13, 45, 108, 0.1);
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: 0 18px 50px rgba(13, 45, 108, 0.08);
+}
+
+.pedagogy-card {
+  padding: 24px;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.pedagogy-card:hover,
+.career-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 70px rgba(13, 45, 108, 0.12);
+}
+
+.pedagogy-card > span {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  background: var(--yellow);
+  color: var(--blue-dark);
+  font-weight: 900;
+}
+
+.pedagogy-card h3,
+.career-card h3 {
+  color: var(--blue-dark);
+}
+
+.career-section {
+  max-width: none;
+  padding-left: clamp(18px, 5vw, 72px);
+  padding-right: clamp(18px, 5vw, 72px);
+  background: var(--white);
+}
+
+.career-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  max-width: 1220px;
+  margin: 0 auto;
+}
+
+.career-card {
+  padding: 26px;
+}
+
+.career-card ul,
+.program-details ul {
+  display: grid;
+  gap: 8px;
+  padding: 0;
+  margin: 12px 0 0;
+  list-style: none;
+}
+
+.career-card li,
+.program-details li {
+  position: relative;
+  padding-left: 20px;
+  color: #475467;
+}
+
+.career-card li::before,
+.program-details li::before {
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  content: "";
+  background: var(--yellow);
+}
+
 .programs-grid {
   align-items: stretch;
 }
@@ -2403,6 +2537,18 @@ tbody tr:hover {
 .program-body {
   display: grid;
   padding: 24px;
+}
+
+.program-details {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(13, 45, 108, 0.1);
+}
+
+.program-details strong {
+  color: var(--blue-dark);
 }
 
 .program-body h3 {
@@ -2677,6 +2823,58 @@ tbody tr:hover {
   color: var(--gray-text);
 }
 
+.faq-section {
+  background: var(--white);
+}
+
+.faq-list {
+  display: grid;
+  gap: 12px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  overflow: hidden;
+}
+
+.faq-item button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  width: 100%;
+  min-height: 62px;
+  padding: 18px 20px;
+  border: 0;
+  background: var(--white);
+  color: var(--blue-dark);
+  font: inherit;
+  font-weight: 900;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq-item button strong {
+  display: grid;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--blue-primary);
+  color: var(--white);
+}
+
+.faq-answer {
+  padding: 0 20px 20px;
+}
+
+.faq-answer p {
+  margin: 0;
+  color: var(--gray-text);
+}
+
 .contact-redesign {
   grid-template-columns: 0.92fr 1fr;
 }
@@ -2697,6 +2895,31 @@ tbody tr:hover {
 .map-placeholder span,
 .map-placeholder strong {
   display: block;
+}
+
+.map-placeholder a {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  margin-top: 14px;
+  border-radius: 8px;
+  background: var(--yellow);
+  color: var(--blue-dark);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.location-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.location-actions a {
+  text-decoration: none;
 }
 
 .contact-form {
@@ -2754,6 +2977,43 @@ tbody tr:hover {
   gap: 12px;
 }
 
+.final-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  max-width: 1220px;
+  margin: 0 auto 80px;
+  padding: 42px clamp(22px, 4vw, 44px);
+  border-radius: 8px;
+  background:
+    linear-gradient(120deg, rgba(13, 45, 108, 0.96), rgba(23, 70, 162, 0.92)),
+    url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1400&q=82") center/cover;
+  box-shadow: 0 26px 80px rgba(13, 45, 108, 0.22);
+}
+
+.final-cta h2,
+.final-cta p {
+  color: var(--white);
+}
+
+.final-cta h2 {
+  max-width: 680px;
+  margin: 12px 0;
+  font-size: clamp(32px, 4.4vw, 54px);
+  line-height: 1.05;
+}
+
+.final-cta .section-label {
+  color: var(--yellow);
+}
+
+.final-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
 .standalone-application {
   background: var(--gray-light);
 }
@@ -2797,8 +3057,14 @@ tbody tr:hover {
 
   .why-card-grid,
   .numbers-section,
-  .gallery-grid {
+  .gallery-grid,
+  .pedagogy-timeline,
+  .career-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pedagogy-timeline::before {
+    display: none;
   }
 
   .gallery-grid figure.wide {
@@ -2816,7 +3082,10 @@ tbody tr:hover {
   .nav-actions,
   .hero-buttons,
   .programs-header,
-  .footer-bottom {
+  .footer-bottom,
+  .final-cta,
+  .final-cta-actions,
+  .location-actions {
     align-items: stretch;
     flex-direction: column;
   }
@@ -2856,7 +3125,9 @@ tbody tr:hover {
   .form-fields,
   .gallery-grid,
   .testimonial-grid,
-  .footer-links {
+  .footer-links,
+  .pedagogy-timeline,
+  .career-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2866,12 +3137,15 @@ tbody tr:hover {
 
   .school-section,
   .why-section,
+  .pedagogy-section,
   .programs-section,
+  .career-section,
   .numbers-section,
   .admissions-story,
   .registration-section,
   .campus-section,
   .testimonials-section,
+  .faq-section,
   .contact-redesign,
   .standalone-application {
     padding-top: 70px;
@@ -2881,5 +3155,9 @@ tbody tr:hover {
   .contact-details p {
     grid-template-columns: 1fr;
     gap: 4px;
+  }
+
+  .final-cta {
+    margin: 0 18px 60px;
   }
 }

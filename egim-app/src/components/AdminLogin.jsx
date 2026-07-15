@@ -24,14 +24,14 @@ export function AdminLogin({ navigate, onLogin }) {
         <LogoMark />
         <div>
           <span className="section-label">Administration</span>
-          <h1>Admin login</h1>
-          <p>Access the EGIM dashboard with backend-managed credentials.</p>
+          <h1>Connexion administrateur</h1>
+          <p>Accédez au tableau de bord EGIM avec les identifiants gérés par l’administration.</p>
         </div>
         {error && <div className="message error">{error}</div>}
         <input type="email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} placeholder="Email" required />
-        <input type="password" value={form.password} onChange={(event) => setForm({ ...form, password: event.target.value })} placeholder="Password" required />
-        <button className="button-primary" type="submit">Login</button>
-        <button className="nav-login" type="button" onClick={() => navigate('/')}>Back to website</button>
+        <input type="password" value={form.password} onChange={(event) => setForm({ ...form, password: event.target.value })} placeholder="Mot de passe" required />
+        <button className="button-primary" type="submit">Se connecter</button>
+        <button className="nav-login" type="button" onClick={() => navigate('/')}>Retour au site</button>
       </form>
     </main>
   )

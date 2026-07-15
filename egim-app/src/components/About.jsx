@@ -1,17 +1,17 @@
 const aboutImage = 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1000&q=82'
 
 const points = [
-  'Practical education',
-  'Modern programs',
-  'Career preparation',
-  'Student support',
+  'Formation pratique',
+  'Programmes modernes',
+  'Préparation professionnelle',
+  'Accompagnement des étudiants',
 ]
 
 const steps = [
-  ['01', 'Enroll', 'Choose a professional major and submit your registration request.'],
-  ['02', 'Learn', 'Follow structured courses with focused classroom instruction.'],
-  ['03', 'Practice', 'Build applied skills through projects, labs, and guided work.'],
-  ['04', 'Build Your Career', 'Prepare for professional environments with confidence.'],
+  ['01', 'S’inscrire', 'Choisir une filière professionnelle et envoyer une demande de préinscription.'],
+  ['02', 'Apprendre', 'Suivre des cours structurés avec un encadrement sérieux en classe.'],
+  ['03', 'Pratiquer', 'Développer des compétences à travers les projets, les laboratoires et les travaux dirigés.'],
+  ['04', 'Préparer son avenir', 'Se préparer progressivement aux exigences du monde professionnel.'],
 ]
 
 export function About() {
@@ -20,44 +20,44 @@ export function About() {
       <section className="school-section reveal" id="about">
         <div className="about-media">
           <div className="image-accent accent-blue"></div>
-          <img src={aboutImage} alt="EGIM students collaborating on campus" />
+          <img src={aboutImage} alt="Etudiants EGIM travaillant en groupe" />
           <div className="about-note">
-            <strong>Modern Learning</strong>
-            <span>Programs designed for progress, discipline, and employability.</span>
+            <strong>Apprentissage moderne</strong>
+            <span>Des filières pensées pour le progrès, la discipline et l’employabilité.</span>
           </div>
         </div>
         <div className="about-copy">
-          <span className="section-label">About EGIM</span>
-          <h2>Welcome to EGIM</h2>
+          <span className="section-label">À propos d’EGIM</span>
+          <h2>Bienvenue à EGIM</h2>
           <p>
-            EGIM is a professional private school focused on useful learning,
-            serious follow-up, and practical preparation. Students study in a
-            clean institutional environment where every program is connected to
-            future career expectations.
+            EGIM est une école privée de formation professionnelle centrée sur
+            l’apprentissage utile, le suivi sérieux et la préparation pratique.
+            Les étudiants évoluent dans un environnement institutionnel clair,
+            avec des programmes liés aux réalités du monde professionnel.
           </p>
           <div className="mission-grid">
             <article>
               <strong>Mission</strong>
-              <span>Prepare students with practical skills, strong work habits, and confidence.</span>
+              <span>Former les étudiants avec des compétences pratiques, de bonnes habitudes de travail et de la confiance.</span>
             </article>
             <article>
               <strong>Vision</strong>
-              <span>Build a trusted school where education, technology, and employability move together.</span>
+              <span>Développer une école reconnue où formation, technologie et insertion professionnelle avancent ensemble.</span>
             </article>
           </div>
           <ul className="point-list">
             {points.map((point) => <li key={point}>{point}</li>)}
           </ul>
-          <a className="button-primary" href="#majors">Learn More</a>
+          <a className="button-primary" href="#majors">Découvrir les filières</a>
         </div>
       </section>
 
       <section className="why-section reveal">
         <div className="why-backdrop" aria-hidden="true"></div>
         <div className="why-copy">
-          <span className="section-label">Why Choose EGIM</span>
-          <h2>A clear path from admission to career readiness</h2>
-          <p>EGIM gives students a focused school experience with modern programs, practical learning, and administrative support.</p>
+          <span className="section-label">Pourquoi choisir EGIM</span>
+          <h2>Un parcours clair, de l’admission à la préparation professionnelle</h2>
+          <p>EGIM offre une expérience scolaire structurée avec des programmes modernes, de la pratique et un accompagnement administratif.</p>
         </div>
         <div className="why-card-grid">
           {steps.map(([number, title, text], index) => (

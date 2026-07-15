@@ -2,10 +2,14 @@ import { useEffect, useMemo, useState } from 'react'
 import { api } from '../api/api'
 import { About } from './About'
 import { CampusGallery } from './CampusGallery'
+import { CareerPaths } from './CareerPaths'
 import { Contact, Footer } from './Contact'
+import { FAQSection } from './FAQSection'
+import { FinalCTA } from './FinalCTA'
 import { Hero } from './Hero'
 import { Majors } from './Majors'
 import { Navbar } from './Navbar'
+import { PedagogySection } from './PedagogySection'
 import { ProgramOverview } from './ProgramOverview'
 import { AdmissionsSection, RegistrationSection } from './Registration'
 import { Statistics } from './Statistics'
@@ -52,13 +56,17 @@ export function LandingPage({ navigate }) {
         <Hero navigate={navigate} stats={stats} />
         <ProgramOverview majors={majors} loading={loading} navigate={navigate} />
         <About />
+        <PedagogySection />
         <Majors majors={majors} groups={groups} loading={loading} navigate={navigate} />
+        <CareerPaths />
         <Statistics majors={majors} groups={groups} students={students} />
         <AdmissionsSection navigate={navigate} />
         <RegistrationSection majors={majors} />
         <CampusGallery />
         <Testimonials />
+        <FAQSection />
         <Contact />
+        <FinalCTA navigate={navigate} />
       </main>
       <Footer navigate={navigate} />
     </div>

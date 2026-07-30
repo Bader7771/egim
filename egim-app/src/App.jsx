@@ -6,13 +6,13 @@ import { RegistrationPage } from './components/Registration'
 import './App.css'
 
 const navItems = [
-  { path: '/admin/dashboard', label: 'Dashboard', icon: 'D' },
-  { path: '/admin/majors', label: 'Majors', icon: 'M' },
-  { path: '/admin/groups', label: 'Groups', icon: 'G' },
-  { path: '/admin/students', label: 'Students', icon: 'S' },
-  { path: '/admin/payments', label: 'Payments', icon: 'P' },
-  { path: '/admin/schedule', label: 'Schedule', icon: 'T' },
-  { path: '/admin/settings', label: 'Settings', icon: 'C' },
+  { path: '/admin/dashboard', label: 'Tableau de bord', icon: 'D' },
+  { path: '/admin/majors', label: 'Filières', icon: 'F' },
+  { path: '/admin/groups', label: 'Classes', icon: 'C' },
+  { path: '/admin/students', label: 'Étudiants', icon: 'É' },
+  { path: '/admin/payments', label: 'Paiements', icon: 'P' },
+  { path: '/admin/schedule', label: 'Emploi du temps', icon: 'T' },
+  { path: '/admin/settings', label: 'Paramètres', icon: 'P' },
 ]
 
 const initialForms = {
@@ -74,7 +74,7 @@ function SearchFilter({ search, setSearch, filters }) {
         type="search"
         value={search}
         onChange={(event) => setSearch(event.target.value)}
-        placeholder="Search records"
+        placeholder="Rechercher dans les données"
       />
       {filters}
     </div>
@@ -84,7 +84,7 @@ function SearchFilter({ search, setSearch, filters }) {
 function Feedback({ loading, error, success }) {
   return (
     <>
-      {loading && <div className="message info">Loading data...</div>}
+      {loading && <div className="message info">Chargement des données...</div>}
       {error && <div className="message error">{error}</div>}
       {success && <div className="message success">{success}</div>}
     </>
@@ -100,7 +100,7 @@ function DataTable({ columns, rows }) {
         </thead>
         <tbody>
           {rows.length === 0 ? (
-            <tr><td colSpan={columns.length}>No records found.</td></tr>
+            <tr><td colSpan={columns.length}>Aucune donnée trouvée.</td></tr>
           ) : rows.map((row, index) => (
             <tr key={index}>
               {row.map((cell, cellIndex) => <td key={`${index}-${cellIndex}`}>{cell}</td>)}
@@ -116,11 +116,11 @@ function EntityForm({ title, children, onSubmit, onCancel, editing }) {
   return (
     <form className="entity-form" onSubmit={onSubmit}>
       <div className="form-title">
-        <h2>{editing ? `Edit ${title}` : `Add ${title}`}</h2>
-        {editing && <button type="button" onClick={onCancel}>Cancel</button>}
+        <h2>{editing ? `Modifier ${title}` : `Ajouter ${title}`}</h2>
+        {editing && <button type="button" onClick={onCancel}>Annuler</button>}
       </div>
       <div className="form-grid">{children}</div>
-      <button className="primary-button" type="submit">{editing ? 'Save changes' : `Add ${title}`}</button>
+      <button className="primary-button" type="submit">{editing ? 'Enregistrer les modifications' : `Ajouter ${title}`}</button>
     </form>
   )
 }
@@ -207,7 +207,7 @@ function AdminDashboard({ onLogout }) {
           <span>EG</span>
           <div>
             <strong>EGIM</strong>
-            <small>School Admin</small>
+            <small>Administration</small>
           </div>
         </div>
         <nav>
@@ -227,12 +227,12 @@ function AdminDashboard({ onLogout }) {
       <main className="main-area">
         <header className="topbar">
           <div>
-            <span className="eyebrow">Admin MVP</span>
-            <strong>2026 academic year</strong>
+            <span className="eyebrow">Espace administrateur</span>
+            <strong>Année académique 2026</strong>
           </div>
           <div className="topbar-actions">
-            <input type="search" placeholder="Global search" />
-            <button type="button" onClick={onLogout}>Logout</button>
+            <input type="search" placeholder="Recherche globale" />
+            <button type="button" onClick={onLogout}>Se déconnecter</button>
           </div>
         </header>
         <div className="content-area">
@@ -251,22 +251,22 @@ function Dashboard({ majors, groups, students, payments, navigate }) {
   return (
     <>
       <PageHeader
-        title="Dashboard"
-        description="School operations overview for the EGIM administration team."
-        action="Add student"
+        title="Tableau de bord"
+        description="Vue d’ensemble des activités et de la vie scolaire d’EGIM."
+        action="Ajouter un étudiant"
         onAction={() => navigate('/admin/students')}
       />
       <section className="stats-grid">
-        <StatCard label="Total Majors" value={majors.length} detail="Active study programs" />
-        <StatCard label="Total Groups" value={groups.length} detail="Scheduled class groups" />
-        <StatCard label="Total Students" value={students.length} detail="Registered records" />
-        <StatCard label="Paid Students" value={paidStudents} detail="Latest payment status" />
-        <StatCard label="Pending Payments" value={pendingPayments} detail="Partial or unpaid students" />
+        <StatCard label="Filières" value={majors.length} detail="Programmes de formation actifs" />
+        <StatCard label="Classes" value={groups.length} detail="Groupes planifiés" />
+        <StatCard label="Étudiants" value={students.length} detail="Dossiers inscrits" />
+        <StatCard label="Étudiants à jour" value={paidStudents} detail="Dernier paiement réglé" />
+        <StatCard label="Paiements en attente" value={pendingPayments} detail="Paiements partiels ou impayés" />
       </section>
       <section className="dashboard-grid">
         <div className="panel wide-panel">
           <div className="panel-title">
-            <h2>Payment Statistics</h2>
+            <h2>Statistiques des paiements</h2>
             <span>2026</span>
           </div>
           <div className="bar-chart" aria-label="Payment statistics">
@@ -274,7 +274,7 @@ function Dashboard({ majors, groups, students, payments, navigate }) {
               const count = payments.filter((payment) => payment.status === status).length
               return (
                 <div className="bar-row" key={status}>
-                  <span>{status}</span>
+                  <span>{{ Paid: 'Payé', Partial: 'Partiel', 'Not Paid': 'Non payé' }[status]}</span>
                   <div className="bar-track"><div className="bar-fill" style={{ width: `${Math.min(Math.max(count * 22, 8), 100)}%` }}></div></div>
                   <strong>{count}</strong>
                 </div>
@@ -283,21 +283,21 @@ function Dashboard({ majors, groups, students, payments, navigate }) {
           </div>
         </div>
         <div className="panel">
-          <div className="panel-title"><h2>Recent Activities</h2><span>Live</span></div>
+          <div className="panel-title"><h2>Activités récentes</h2><span>En direct</span></div>
           <ul className="activity-list">
             {payments.slice(0, 4).map((payment) => (
-              <li key={payment._id}>{studentName(payment.studentId)} payment marked {payment.status}</li>
+              <li key={payment._id}>Paiement de {studentName(payment.studentId)} : {{ Paid: 'payé', Partial: 'partiel', 'Not Paid': 'non payé' }[payment.status]}</li>
             ))}
-            {payments.length === 0 && <li>No activity yet.</li>}
+            {payments.length === 0 && <li>Aucune activité récente.</li>}
           </ul>
         </div>
         <div className="panel">
-          <div className="panel-title"><h2>Quick Actions</h2></div>
+          <div className="panel-title"><h2>Actions rapides</h2></div>
           <div className="quick-actions">
-            <button type="button" onClick={() => navigate('/admin/majors')}>Create major</button>
-            <button type="button" onClick={() => navigate('/admin/groups')}>Create group</button>
-            <button type="button" onClick={() => navigate('/admin/payments')}>Record payment</button>
-            <button type="button" onClick={() => navigate('/admin/schedule')}>Plan schedule</button>
+            <button type="button" onClick={() => navigate('/admin/majors')}>Créer une filière</button>
+            <button type="button" onClick={() => navigate('/admin/groups')}>Créer une classe</button>
+            <button type="button" onClick={() => navigate('/admin/payments')}>Enregistrer un paiement</button>
+            <button type="button" onClick={() => navigate('/admin/schedule')}>Planifier un cours</button>
           </div>
         </div>
       </section>
@@ -313,7 +313,7 @@ function MajorsPage({ majors, groups, students, runAction }) {
     event.preventDefault()
     runAction(
       () => editingId ? api.put(`/majors/${editingId}`, form) : api.post('/majors', form),
-      editingId ? 'Major updated.' : 'Major created.',
+      editingId ? 'Filière mise à jour.' : 'Filière créée.',
     )
     setForm(initialForms.major)
     setEditingId('')
@@ -321,9 +321,9 @@ function MajorsPage({ majors, groups, students, runAction }) {
 
   return (
     <>
-      <PageHeader title="Majors" description="Create, edit, delete, and inspect EGIM study programs." />
-      <EntityForm title="major" onSubmit={submit} editing={Boolean(editingId)} onCancel={() => { setForm(initialForms.major); setEditingId('') }}>
-        <input value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} placeholder="Major name" required />
+      <PageHeader title="Filières" description="Créez et gérez les programmes de formation proposés par EGIM." />
+      <EntityForm title="une filière" onSubmit={submit} editing={Boolean(editingId)} onCancel={() => { setForm(initialForms.major); setEditingId('') }}>
+        <input value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} placeholder="Nom de la filière" required />
         <input value={form.description} onChange={(event) => setForm({ ...form, description: event.target.value })} placeholder="Description" />
       </EntityForm>
       <section className="cards-grid">
@@ -331,20 +331,20 @@ function MajorsPage({ majors, groups, students, runAction }) {
           <article className="record-card" key={major._id}>
             <div className="record-heading">
               <h2>{major.name}</h2>
-              <span>{groups.filter((group) => idOf(group.majorId) === major._id).length} groups</span>
+              <span>{groups.filter((group) => idOf(group.majorId) === major._id).length} classes</span>
             </div>
-            <p>{major.description || 'No description yet.'}</p>
+            <p>{major.description || 'Aucune description.'}</p>
             <div className="metric-row">
-              <span>Students</span>
+              <span>Étudiants</span>
               <strong>{students.filter((student) => idOf(student.majorId) === major._id).length}</strong>
             </div>
             <div className="chip-list">
               {groups.filter((group) => idOf(group.majorId) === major._id).map((group) => <span className="chip" key={group._id}>{group.name}</span>)}
             </div>
             <div className="row-actions">
-              <button type="button" onClick={() => alert(`${major.name}\n${major.description || ''}`)}>View</button>
-              <button type="button" onClick={() => { setForm({ name: major.name, description: major.description || '' }); setEditingId(major._id) }}>Edit</button>
-              <button type="button" onClick={() => confirmDelete(() => runAction(() => api.delete(`/majors/${major._id}`), 'Major deleted.'))}>Delete</button>
+              <button type="button" onClick={() => alert(`${major.name}\n${major.description || ''}`)}>Voir</button>
+              <button type="button" onClick={() => { setForm({ name: major.name, description: major.description || '' }); setEditingId(major._id) }}>Modifier</button>
+              <button type="button" onClick={() => confirmDelete(() => runAction(() => api.delete(`/majors/${major._id}`), 'Filière supprimée.'))}>Supprimer</button>
             </div>
           </article>
         ))}
@@ -363,7 +363,7 @@ function GroupsPage({ majors, groups, students, schedules, runAction }) {
     event.preventDefault()
     runAction(
       () => editingId ? api.put(`/groups/${editingId}`, form) : api.post('/groups', form),
-      editingId ? 'Group updated.' : 'Group created.',
+      editingId ? 'Classe mise à jour.' : 'Classe créée.',
     )
     setForm(initialForms.group)
     setEditingId('')
@@ -371,18 +371,18 @@ function GroupsPage({ majors, groups, students, schedules, runAction }) {
 
   return (
     <>
-      <PageHeader title="Groups" description="Manage class groups, classrooms, schedules, and students." />
-      <EntityForm title="group" onSubmit={submit} editing={Boolean(editingId)} onCancel={() => { setForm(initialForms.group); setEditingId('') }}>
-        <input value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} placeholder="Group name" required />
+      <PageHeader title="Classes" description="Gérez les classes, les salles, les emplois du temps et les étudiants." />
+      <EntityForm title="une classe" onSubmit={submit} editing={Boolean(editingId)} onCancel={() => { setForm(initialForms.group); setEditingId('') }}>
+        <input value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} placeholder="Nom de la classe" required />
         <select value={form.majorId} onChange={(event) => setForm({ ...form, majorId: event.target.value })} required>
-          <option value="">Select major</option>
+          <option value="">Sélectionner une filière</option>
           {majors.map((major) => <option value={major._id} key={major._id}>{major.name}</option>)}
         </select>
-        <input value={form.classroom} onChange={(event) => setForm({ ...form, classroom: event.target.value })} placeholder="Classroom" />
+        <input value={form.classroom} onChange={(event) => setForm({ ...form, classroom: event.target.value })} placeholder="Salle" />
       </EntityForm>
       <SearchFilter search={search} setSearch={setSearch} />
       <DataTable
-        columns={['Group', 'Major', 'Students', 'Classroom', 'Schedule', 'Actions']}
+        columns={['Classe', 'Filière', 'Étudiants', 'Salle', 'Jours de cours', 'Actions']}
         rows={filtered.map((group) => [
           group.name,
           majorName(group.majorId, majors),
@@ -390,9 +390,9 @@ function GroupsPage({ majors, groups, students, schedules, runAction }) {
           group.classroom || '-',
           schedules.filter((schedule) => idOf(schedule.groupId) === group._id).map((schedule) => schedule.day).join(', ') || '-',
           <div className="table-actions" key={group._id}>
-            <button type="button" onClick={() => alert(`${group.name}\n${majorName(group.majorId, majors)}\n${group.classroom || ''}`)}>View</button>
-            <button type="button" onClick={() => { setForm({ name: group.name, majorId: idOf(group.majorId), classroom: group.classroom || '' }); setEditingId(group._id) }}>Edit</button>
-            <button type="button" onClick={() => confirmDelete(() => runAction(() => api.delete(`/groups/${group._id}`), 'Group deleted.'))}>Delete</button>
+            <button type="button" onClick={() => alert(`${group.name}\n${majorName(group.majorId, majors)}\n${group.classroom || ''}`)}>Voir</button>
+            <button type="button" onClick={() => { setForm({ name: group.name, majorId: idOf(group.majorId), classroom: group.classroom || '' }); setEditingId(group._id) }}>Modifier</button>
+            <button type="button" onClick={() => confirmDelete(() => runAction(() => api.delete(`/groups/${group._id}`), 'Classe supprimée.'))}>Supprimer</button>
           </div>,
         ])}
       />
@@ -420,7 +420,7 @@ function StudentsPage({ majors, groups, students, payments, runAction }) {
     event.preventDefault()
     runAction(
       () => editingId ? api.put(`/students/${editingId}`, form) : api.post('/students', form),
-      editingId ? 'Student updated.' : 'Student created.',
+      editingId ? 'Étudiant mis à jour.' : 'Étudiant ajouté.',
     )
     setForm(initialForms.student)
     setEditingId('')
@@ -428,18 +428,18 @@ function StudentsPage({ majors, groups, students, payments, runAction }) {
 
   return (
     <>
-      <PageHeader title="Students" description="Search, filter, and maintain student registration records." />
-      <EntityForm title="student" onSubmit={submit} editing={Boolean(editingId)} onCancel={() => { setForm(initialForms.student); setEditingId('') }}>
-        <input value={form.fullName} onChange={(event) => setForm({ ...form, fullName: event.target.value })} placeholder="Full name" required />
-        <input value={form.phone} onChange={(event) => setForm({ ...form, phone: event.target.value })} placeholder="Phone" />
+      <PageHeader title="Étudiants" description="Recherchez, filtrez et gérez les dossiers d’inscription." />
+      <EntityForm title="un étudiant" onSubmit={submit} editing={Boolean(editingId)} onCancel={() => { setForm(initialForms.student); setEditingId('') }}>
+        <input value={form.fullName} onChange={(event) => setForm({ ...form, fullName: event.target.value })} placeholder="Nom complet" required />
+        <input value={form.phone} onChange={(event) => setForm({ ...form, phone: event.target.value })} placeholder="Téléphone" />
         <input type="email" value={form.email} onChange={(event) => setForm({ ...form, email: event.target.value })} placeholder="Email" />
         <input type="date" value={form.birthDate} onChange={(event) => setForm({ ...form, birthDate: event.target.value })} />
         <select value={form.majorId} onChange={(event) => setForm({ ...form, majorId: event.target.value })} required>
-          <option value="">Select major</option>
+          <option value="">Sélectionner une filière</option>
           {majors.map((major) => <option value={major._id} key={major._id}>{major.name}</option>)}
         </select>
         <select value={form.groupId} onChange={(event) => setForm({ ...form, groupId: event.target.value })} required>
-          <option value="">Select group</option>
+          <option value="">Sélectionner une classe</option>
           {groups.map((group) => <option value={group._id} key={group._id}>{group.name}</option>)}
         </select>
       </EntityForm>
@@ -448,23 +448,23 @@ function StudentsPage({ majors, groups, students, payments, runAction }) {
         setSearch={setSearch}
         filters={<>
           <select value={majorFilter} onChange={(event) => setMajorFilter(event.target.value)}>
-            <option value="all">All majors</option>
+            <option value="all">Toutes les filières</option>
             {majors.map((major) => <option value={major._id} key={major._id}>{major.name}</option>)}
           </select>
           <select value={groupFilter} onChange={(event) => setGroupFilter(event.target.value)}>
-            <option value="all">All groups</option>
+            <option value="all">Toutes les classes</option>
             {groups.map((group) => <option value={group._id} key={group._id}>{group.name}</option>)}
           </select>
           <select value={paymentFilter} onChange={(event) => setPaymentFilter(event.target.value)}>
-            <option value="all">All payments</option>
-            <option value="Paid">Paid</option>
-            <option value="Partial">Partial</option>
-            <option value="Not Paid">Not Paid</option>
+            <option value="all">Tous les paiements</option>
+            <option value="Paid">Payé</option>
+            <option value="Partial">Partiel</option>
+            <option value="Not Paid">Non payé</option>
           </select>
         </>}
       />
       <DataTable
-        columns={['Student', 'Phone', 'Major', 'Group', 'Registered', 'Payment', 'Actions']}
+        columns={['Étudiant', 'Téléphone', 'Filière', 'Classe', 'Inscription', 'Paiement', 'Actions']}
         rows={filtered.map((student) => [
           <div className="student-cell" key={student._id}><strong>{student.fullName}</strong><span>{student.email}</span></div>,
           student.phone || '-',
@@ -473,8 +473,8 @@ function StudentsPage({ majors, groups, students, payments, runAction }) {
           formatDate(student.createdAt),
           <Badge status={getLatestPayment(student._id, payments)?.status || 'Not Paid'} key={`${student._id}-badge`} />,
           <div className="table-actions" key={`${student._id}-actions`}>
-            <button type="button" onClick={() => { setForm({ fullName: student.fullName, phone: student.phone || '', email: student.email || '', birthDate: formatDate(student.birthDate) === '-' ? '' : formatDate(student.birthDate), majorId: idOf(student.majorId), groupId: idOf(student.groupId) }); setEditingId(student._id) }}>Edit</button>
-            <button type="button" onClick={() => confirmDelete(() => runAction(() => api.delete(`/students/${student._id}`), 'Student deleted.'))}>Delete</button>
+            <button type="button" onClick={() => { setForm({ fullName: student.fullName, phone: student.phone || '', email: student.email || '', birthDate: formatDate(student.birthDate) === '-' ? '' : formatDate(student.birthDate), majorId: idOf(student.majorId), groupId: idOf(student.groupId) }); setEditingId(student._id) }}>Modifier</button>
+            <button type="button" onClick={() => confirmDelete(() => runAction(() => api.delete(`/students/${student._id}`), 'Étudiant supprimé.'))}>Supprimer</button>
           </div>,
         ])}
       />
@@ -490,7 +490,7 @@ function PaymentsPage({ students, payments, runAction }) {
     event.preventDefault()
     runAction(
       () => editingId ? api.put(`/payments/${editingId}`, paymentPayload(form)) : api.post('/payments', paymentPayload(form)),
-      editingId ? 'Payment updated.' : 'Payment recorded.',
+      editingId ? 'Paiement mis à jour.' : 'Paiement enregistré.',
     )
     setForm(initialForms.payment)
     setEditingId('')
@@ -498,49 +498,49 @@ function PaymentsPage({ students, payments, runAction }) {
 
   return (
     <>
-      <PageHeader title="Payments" description="Track monthly and full-year payments by student." />
-      <EntityForm title="payment" onSubmit={submit} editing={Boolean(editingId)} onCancel={() => { setForm(initialForms.payment); setEditingId('') }}>
+      <PageHeader title="Paiements" description="Suivez les règlements mensuels et annuels de chaque étudiant." />
+      <EntityForm title="un paiement" onSubmit={submit} editing={Boolean(editingId)} onCancel={() => { setForm(initialForms.payment); setEditingId('') }}>
         <select value={form.studentId} onChange={(event) => setForm({ ...form, studentId: event.target.value })} required>
-          <option value="">Select student</option>
+          <option value="">Sélectionner un étudiant</option>
           {students.map((student) => <option value={student._id} key={student._id}>{student.fullName}</option>)}
         </select>
         <select value={form.type} onChange={(event) => setForm({ ...form, type: event.target.value })}>
-          <option value="Monthly">Monthly</option>
-          <option value="Full year">Full year</option>
+          <option value="Monthly">Mensuel</option>
+          <option value="Full year">Année complète</option>
         </select>
-        <input type="number" value={form.amount} onChange={(event) => setForm({ ...form, amount: event.target.value })} placeholder="Amount" required />
+        <input type="number" value={form.amount} onChange={(event) => setForm({ ...form, amount: event.target.value })} placeholder="Montant" required />
         <select value={form.status} onChange={(event) => setForm({ ...form, status: event.target.value })}>
-          <option value="Paid">Paid</option>
-          <option value="Partial">Partial</option>
-          <option value="Not Paid">Not Paid</option>
+          <option value="Paid">Payé</option>
+          <option value="Partial">Partiel</option>
+          <option value="Not Paid">Non payé</option>
         </select>
-        <input value={form.month} onChange={(event) => setForm({ ...form, month: event.target.value })} placeholder="Month" />
-        <input type="number" value={form.year} onChange={(event) => setForm({ ...form, year: event.target.value })} placeholder="Year" required />
+        <input value={form.month} onChange={(event) => setForm({ ...form, month: event.target.value })} placeholder="Mois" />
+        <input type="number" value={form.year} onChange={(event) => setForm({ ...form, year: event.target.value })} placeholder="Année" required />
         <input type="date" value={form.paymentDate} onChange={(event) => setForm({ ...form, paymentDate: event.target.value })} />
       </EntityForm>
       <section className="stats-grid compact">
-        <StatCard label="Paid" value={payments.filter((payment) => payment.status === 'Paid').length} detail="Payments" />
-        <StatCard label="Partial" value={payments.filter((payment) => payment.status === 'Partial').length} detail="Payments" />
-        <StatCard label="Not Paid" value={payments.filter((payment) => payment.status === 'Not Paid').length} detail="Payments" />
+        <StatCard label="Payés" value={payments.filter((payment) => payment.status === 'Paid').length} detail="Paiements" />
+        <StatCard label="Partiels" value={payments.filter((payment) => payment.status === 'Partial').length} detail="Paiements" />
+        <StatCard label="Non payés" value={payments.filter((payment) => payment.status === 'Not Paid').length} detail="Paiements" />
       </section>
       <DataTable
-        columns={['Student', 'Type', 'Amount', 'Month', 'Year', 'Status', 'Payment Date', 'Actions']}
+        columns={['Étudiant', 'Type', 'Montant', 'Mois', 'Année', 'Statut', 'Date de paiement', 'Actions']}
         rows={payments.map((payment) => [
           studentName(payment.studentId, students),
           payment.type,
           `${Number(payment.amount).toLocaleString()} MAD`,
           payment.month || '-',
           payment.year,
-          <select key={`${payment._id}-status`} value={payment.status} onChange={(event) => runAction(() => api.put(`/payments/${payment._id}`, { ...paymentPayload(payment), status: event.target.value }), 'Payment status updated.')}>
-            <option value="Paid">Paid</option>
-            <option value="Partial">Partial</option>
-            <option value="Not Paid">Not Paid</option>
+          <select key={`${payment._id}-status`} value={payment.status} onChange={(event) => runAction(() => api.put(`/payments/${payment._id}`, { ...paymentPayload(payment), status: event.target.value }), 'Statut du paiement mis à jour.')}>
+            <option value="Paid">Payé</option>
+            <option value="Partial">Partiel</option>
+            <option value="Not Paid">Non payé</option>
           </select>,
           formatDate(payment.paymentDate),
           <div className="table-actions" key={payment._id}>
-            <button type="button" onClick={() => alert(`Payment history for ${studentName(payment.studentId, students)} is available in this table.`)}>View</button>
-            <button type="button" onClick={() => { setForm({ studentId: idOf(payment.studentId), type: payment.type, amount: payment.amount, status: payment.status, month: payment.month || '', year: payment.year, paymentDate: formatDate(payment.paymentDate) === '-' ? '' : formatDate(payment.paymentDate) }); setEditingId(payment._id) }}>Edit</button>
-            <button type="button" onClick={() => confirmDelete(() => runAction(() => api.delete(`/payments/${payment._id}`), 'Payment deleted.'))}>Delete</button>
+            <button type="button" onClick={() => alert(`L’historique de ${studentName(payment.studentId, students)} est disponible dans ce tableau.`)}>Voir</button>
+            <button type="button" onClick={() => { setForm({ studentId: idOf(payment.studentId), type: payment.type, amount: payment.amount, status: payment.status, month: payment.month || '', year: payment.year, paymentDate: formatDate(payment.paymentDate) === '-' ? '' : formatDate(payment.paymentDate) }); setEditingId(payment._id) }}>Modifier</button>
+            <button type="button" onClick={() => confirmDelete(() => runAction(() => api.delete(`/payments/${payment._id}`), 'Paiement supprimé.'))}>Supprimer</button>
           </div>,
         ])}
       />
@@ -568,7 +568,7 @@ function SchedulePage({ groups, schedules, runAction }) {
     event.preventDefault()
     runAction(
       () => editingId ? api.put(`/schedules/${editingId}`, form) : api.post('/schedules', form),
-      editingId ? 'Schedule updated.' : 'Schedule created.',
+      editingId ? 'Cours mis à jour.' : 'Cours planifié.',
     )
     setForm(initialForms.schedule)
     setEditingId('')
@@ -576,40 +576,40 @@ function SchedulePage({ groups, schedules, runAction }) {
 
   return (
     <>
-      <PageHeader title="Schedule" description="Create timetables and check classroom or group conflicts." />
-      <EntityForm title="schedule" onSubmit={submit} editing={Boolean(editingId)} onCancel={() => { setForm(initialForms.schedule); setEditingId('') }}>
+      <PageHeader title="Emploi du temps" description="Planifiez les cours et contrôlez les conflits de salles ou de classes." />
+      <EntityForm title="un cours" onSubmit={submit} editing={Boolean(editingId)} onCancel={() => { setForm(initialForms.schedule); setEditingId('') }}>
         <select value={form.groupId} onChange={(event) => setForm({ ...form, groupId: event.target.value })} required>
-          <option value="">Select group</option>
+          <option value="">Sélectionner une classe</option>
           {groups.map((group) => <option value={group._id} key={group._id}>{group.name}</option>)}
         </select>
         <select value={form.day} onChange={(event) => setForm({ ...form, day: event.target.value })}>
-          {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => <option value={day} key={day}>{day}</option>)}
+          {Object.entries({ Monday: 'Lundi', Tuesday: 'Mardi', Wednesday: 'Mercredi', Thursday: 'Jeudi', Friday: 'Vendredi', Saturday: 'Samedi', Sunday: 'Dimanche' }).map(([value, label]) => <option value={value} key={value}>{label}</option>)}
         </select>
         <input type="time" value={form.startTime} onChange={(event) => setForm({ ...form, startTime: event.target.value })} required />
         <input type="time" value={form.endTime} onChange={(event) => setForm({ ...form, endTime: event.target.value })} required />
-        <input value={form.subject} onChange={(event) => setForm({ ...form, subject: event.target.value })} placeholder="Subject" required />
-        <input value={form.classroom} onChange={(event) => setForm({ ...form, classroom: event.target.value })} placeholder="Classroom" required />
+        <input value={form.subject} onChange={(event) => setForm({ ...form, subject: event.target.value })} placeholder="Matière" required />
+        <input value={form.classroom} onChange={(event) => setForm({ ...form, classroom: event.target.value })} placeholder="Salle" required />
       </EntityForm>
       <section className="planner-panel">
         <div>
-          <h2>Organization Helper</h2>
-          <p>Schedules are checked by the backend to avoid same-group and classroom conflicts.</p>
+          <h2>Assistant d’organisation</h2>
+          <p>Les horaires sont contrôlés afin d’éviter les conflits de classe et de salle.</p>
         </div>
         <span className={conflicts.length ? 'conflict-warning' : 'conflict-ok'}>
-          {conflicts.length ? `${conflicts.length} conflicts detected` : 'No conflicts detected'}
+          {conflicts.length ? `${conflicts.length} conflit(s) détecté(s)` : 'Aucun conflit détecté'}
         </span>
       </section>
       <DataTable
-        columns={['Group', 'Day', 'Time', 'Subject', 'Classroom', 'Actions']}
+        columns={['Classe', 'Jour', 'Horaire', 'Matière', 'Salle', 'Actions']}
         rows={schedules.map((schedule) => [
           groupName(schedule.groupId, groups),
-          schedule.day,
+          ({ Monday: 'Lundi', Tuesday: 'Mardi', Wednesday: 'Mercredi', Thursday: 'Jeudi', Friday: 'Vendredi', Saturday: 'Samedi', Sunday: 'Dimanche' })[schedule.day] || schedule.day,
           `${schedule.startTime} - ${schedule.endTime}`,
           schedule.subject,
           schedule.classroom,
           <div className="table-actions" key={schedule._id}>
-            <button type="button" onClick={() => { setForm({ groupId: idOf(schedule.groupId), day: schedule.day, startTime: schedule.startTime, endTime: schedule.endTime, subject: schedule.subject, classroom: schedule.classroom }); setEditingId(schedule._id) }}>Edit</button>
-            <button type="button" onClick={() => confirmDelete(() => runAction(() => api.delete(`/schedules/${schedule._id}`), 'Schedule deleted.'))}>Delete</button>
+            <button type="button" onClick={() => { setForm({ groupId: idOf(schedule.groupId), day: schedule.day, startTime: schedule.startTime, endTime: schedule.endTime, subject: schedule.subject, classroom: schedule.classroom }); setEditingId(schedule._id) }}>Modifier</button>
+            <button type="button" onClick={() => confirmDelete(() => runAction(() => api.delete(`/schedules/${schedule._id}`), 'Cours supprimé.'))}>Supprimer</button>
           </div>,
         ])}
       />
@@ -620,18 +620,18 @@ function SchedulePage({ groups, schedules, runAction }) {
 function SettingsPage() {
   return (
     <>
-      <PageHeader title="Settings" description="Prepare application configuration for the admin-only MVP." />
+      <PageHeader title="Paramètres" description="Configurez les informations essentielles de l’espace d’administration." />
       <section className="settings-grid">
         {[
-          ['School profile', 'EGIM school identity, address, and contact information.'],
-          ['Academic year', 'Default year, active months, registration windows, and payment rules.'],
-          ['Admin access', 'Admin accounts and future role management placeholders.'],
-          ['MongoDB API', 'Backend connection status and database environment configuration.'],
+          ['Profil de l’école', 'Identité d’EGIM, adresse et coordonnées de contact.'],
+          ['Année académique', 'Année active, périodes d’inscription et règles de paiement.'],
+          ['Accès administrateur', 'Comptes de l’équipe et gestion des rôles.'],
+          ['État du système', 'Connexion à la base de données et disponibilité de l’API.'],
         ].map(([title, text]) => (
           <article className="record-card" key={title}>
             <h2>{title}</h2>
             <p>{text}</p>
-            <button type="button">Configure</button>
+            <button type="button">Configurer</button>
           </article>
         ))}
       </section>
@@ -687,17 +687,17 @@ function App() {
 
 function majorName(majorId, majors) {
   if (typeof majorId === 'object' && majorId !== null) return majorId.name
-  return majors.find((major) => major._id === majorId)?.name ?? 'Unassigned'
+  return majors.find((major) => major._id === majorId)?.name ?? 'Non affectée'
 }
 
 function groupName(groupId, groups) {
   if (typeof groupId === 'object' && groupId !== null) return groupId.name
-  return groups.find((group) => group._id === groupId)?.name ?? 'Unassigned'
+  return groups.find((group) => group._id === groupId)?.name ?? 'Non affectée'
 }
 
 function studentName(studentId, students = []) {
   if (typeof studentId === 'object' && studentId !== null) return studentId.fullName
-  return students.find((student) => student._id === studentId)?.fullName ?? 'Unknown student'
+  return students.find((student) => student._id === studentId)?.fullName ?? 'Étudiant inconnu'
 }
 
 function paymentPayload(payment) {
@@ -713,7 +713,7 @@ function paymentPayload(payment) {
 }
 
 function confirmDelete(action) {
-  if (window.confirm('Delete this record?')) {
+  if (window.confirm('Voulez-vous vraiment supprimer cet élément ?')) {
     action()
   }
 }
